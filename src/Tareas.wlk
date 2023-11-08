@@ -1,28 +1,48 @@
 import Nave.*
 
 class Tarea {
-	method serRealizadaPor(_unJugador){
-		nave.verificarGanadores()
+	const itemsNecesarios = []
+	
+	method serRealizadaPor(unJugador){
+		itemsNecesarios.forEach {item => unJugador.usarItem(item)}
 	}
 	
 	method puedeRealizarsePor(unJugador) = true
 }
 
-object arreglarTableroElectrico inherits Tarea {
+object arreglarTableroElectrico inherits Tarea(itemsNecesarios = ["llaveInglesa"]) {
 
 	override method serRealizadaPor(unJugador){
 		unJugador.aumentarSospechaEn(10)
-		unJugador.usarItem("llaveInglesa")
 		super(unJugador)
 	}
 	
 	override method puedeRealizarsePor(unJugador) = unJugador.tieneItem("llaveInglesa")
 }
 
+object sacarLaBasura inherits Tarea(itemsNecesarios = ["escoba", "bolsaDeConsorcio"]) {
+
+	override method serRealizadaPor(unJugador){
+		unJugador.aumentarSospechaEn(10)
+		super(unJugador)
+	}
+	
+	override method puedeRealizarsePor(unJugador) = 
+		itemsNecesarios.all { item => unJugador.tieneItem(item)}
 }
 
-object avisarFinish inherits Tarea { 
+object ventilarLaNave inherits Tarea {
+
 	override method serRealizadaPor(unJugador){
-		nave.verificarGanadores()
+		nave.aumentarOxigeno(5)
+	}
+	
+	override method puedeRealizarsePor(unJugador) = 
+		itemsNecesarios.all { item => unJugador.tieneItem(item)}
+}
+
+object noHacerNada inherits Tarea { 
+	override method serRealizadaPor(unJugador){
+		//
 	}
 }

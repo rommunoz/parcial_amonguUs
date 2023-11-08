@@ -7,7 +7,7 @@ class Jugador {
 	var mochila = []
 	var color
 	var sospecha = 40
-	var tareas = new List()
+	var tareasPendientes = new List()
 	
 	//1
 	method esSospechoso() = sospecha > 50
@@ -17,22 +17,22 @@ class Jugador {
 	}
 	
 	//3
-	method completoTodasSusTareas()
+	method completoTodasSusTareas() = tareasPendientes.isEmpty() //por mi cambio de modelado
 	
 	//4
 	method realizarTareaPendiente(){
-		const pendiente = tareas.findOrDefault ({tarea => not tarea.fueCompletada()}, avisarFinish)
-		if (self.puedoRealizar(pendiente))
+		const pendiente = tareasPendientes.findOrDefault(
+			{tarea => self.puedoRealizar(tarea)}, noHacerNada
+		)
 		self.realizarTarea(pendiente)
-	}
-	
-	method realizarTarea(unaTarea){
-		unaTarea.serRealizadaPor(self)
+		nave.verificarGanadores()
 	}
 	
 	method puedoRealizar(unaTarea){
 		return unaTarea.puedeRealizarsePor(self)
 	}
+
+	method realizarTarea(unaTarea)
 	
 	method usarItem(unItem){
 		mochila.remove(unItem)
