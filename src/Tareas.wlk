@@ -1,0 +1,6 @@
+import Nave.*
+
+class Tarea {
+	
+	
+}
