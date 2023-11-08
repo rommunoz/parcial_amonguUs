@@ -7,4 +7,10 @@ class Tripulante inherits Jugador {
 		unaTarea.serRealizadaPor(self)
 		tareasPendientes.remove(unaTarea)
 	}
+	
+	//6
+	override method serExpulsado(){
+		nave.expulsarTripulante(self)
+		super()
+	}
 }

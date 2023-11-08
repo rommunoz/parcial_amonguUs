@@ -1,13 +1,15 @@
 import Nave.*
 import Tareas.*
+import VotoEnBlanco.*
 
 class Jugador {
 	var property expulsado
-	var votos = 0
+	var votosEnContra = 0
 	var mochila = []
 	var color
 	var sospecha = 40
 	var tareasPendientes = new List()
+	var criterioDeVotacion 
 	
 	//1
 	method esSospechoso() = sospecha > 50
@@ -44,4 +46,35 @@ class Jugador {
 	
 	method tieneItem(unItem) = mochila.contains(unItem)
 	
+	//6
+	method llamarAReunionDeEmergencia(){
+		nave.reunionDeEmergencia()
+	}
+	
+	method votarAUnoDe(jugadoresEnNave){
+		criterioDeVotacion.votarAUnoDe(self, jugadoresEnNave)
+	}
+	
+	method votarEnBlanco(){
+		self.votarA(votoEnBlanco)
+	}
+	
+	method votarA(unJugador){
+		unJugador.sumarVotoEnContra()
+	}
+	
+	method sumarVotoEnContra(){
+		votosEnContra++
+	}
+	method votosEnContra() = votosEnContra
+	
+	method mochilaVacia() = mochila.isEmpty()
+	
+	method serExpulsado(){
+		self.expulsado(true)
+	}
+	
+	method resetearVotosEnContra(){
+		votosEnContra = 0
+	}
 }
