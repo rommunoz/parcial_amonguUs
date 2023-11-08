@@ -1,7 +1,12 @@
 import Nave.*
+import Jugador.*
 
-class Jugador {
-	method howAreYou() {
-		return 'I am Wolloktastic!'
+class Impostor inherits Jugador {
+	
+	//3
+	override method completoTodasSusTareas() = true
+	
+	override method realizarTarea(_unaTarea){
+		//no hacen nada
 	}
 }

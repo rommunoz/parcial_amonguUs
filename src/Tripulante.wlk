@@ -2,7 +2,12 @@ import Nave.*
 import Jugador.*
 
 class Tripulante inherits Jugador {
-	method howAreYou() {
-		return 'I am Wolloktastic!'
+	
+	override method completoTodasSusTareas() {
+		return tareas.all{tarea => tarea.fueCompletada()}
+	}
+	
+	method realizarTarea(_unaTarea){
+		//no hacen nada
 	}
 }
